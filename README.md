@@ -1,4 +1,4 @@
-# ITM Rescue Force v4.0
+# ITM Rescue Force
 
 **A fully offline, AI-powered emergency response platform built for Bangladesh.**
 
