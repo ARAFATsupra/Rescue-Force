@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="ITM Rescue Force — Bangladesh Emergency Response System powered by IT, Management and AI"/>
+  <title>ITM Rescue Force — Emergency Response System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══════════════════════════════════════════════ -->
+<nav class="navbar at-top" id="navbar">
+  <div class="nav-wrap">
+    <div class="nav-brand">
+      <div class="nav-crest"><i class="fa-solid fa-shield-halved"></i></div>
+      <span class="nav-wordmark">ITM<span>RESCUE</span>FORCE</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#how">System</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#report">Report</a></li>
+      <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#rescuegpt" class="nav-cta"><i class="fa-solid fa-robot"></i> RescueGPT</a></li>
+      <li><a href="admin.html" class="nav-admin-link"><i class="fa-solid fa-lock"></i> Admin</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme" title="Toggle dark/light mode">
+        <i class="fa-solid fa-sun"  id="iconSun"></i>
+        <i class="fa-solid fa-moon" id="iconMoon" style="display:none"></i>
+      </button>
+      <button class="icon-btn hamburger" id="hamburger" aria-label="Open menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" id="mobileClose"><i class="fa-solid fa-xmark"></i></button>
+  <a href="#home"      class="mob-link"><i class="fa-solid fa-house"></i> Home</a>
+  <a href="#about"     class="mob-link"><i class="fa-solid fa-circle-info"></i> About</a>
+  <a href="#how"       class="mob-link"><i class="fa-solid fa-gears"></i> System</a>
+  <a href="#team"      class="mob-link"><i class="fa-solid fa-users"></i> Team</a>
+  <a href="#report"    class="mob-link"><i class="fa-solid fa-triangle-exclamation"></i> Report Emergency</a>
+  <a href="#dashboard" class="mob-link"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+  <a href="#rescuegpt" class="mob-link accent"><i class="fa-solid fa-robot"></i> RescueGPT AI</a>
+  <a href="admin.html" class="mob-link"><i class="fa-solid fa-lock"></i> Admin Panel</a>
+</div>
+
+<!-- ══ HERO ════════════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-scan"></div>
+
+  <div class="hero-inner">
+    <!-- Left -->
+    <div class="hero-left">
+      <div class="hero-eyebrow a-in" style="--d:0s">
+        <i class="fa-solid fa-location-dot"></i>
+        Bangladesh Emergency Response System
+      </div>
+      <h1 class="hero-title a-in" style="--d:.06s">
+        <span class="break">ITM</span>
+        <span class="break">RESCUE</span>
+        <span class="break accent">FORCE</span>
+      </h1>
+      <p class="hero-sub a-in" style="--d:.12s">
+        Powered by <strong>Information Technology</strong><span class="hero-sep">/</span>
+        <strong>Management</strong><span class="hero-sep">/</span>
+        <strong>Artificial Intelligence</strong><br>
+        Saving lives. Protecting communities. Serving Bangladesh.
+      </p>
+      <div class="hero-btns a-in" style="--d:.18s">
+        <a href="#report"    class="btn btn-primary"><i class="fa-solid fa-triangle-exclamation"></i> Report Emergency</a>
+        <a href="#rescuegpt" class="btn btn-ghost"><i class="fa-solid fa-robot"></i> RescueGPT AI</a>
+      </div>
+      <div class="hero-stats a-in" style="--d:.24s">
+        <div class="h-stat">
+          <span class="h-num" data-target="24">0</span>
+          <span class="h-lbl">Hours Active</span>
+        </div>
+        <div class="h-sep"></div>
+        <div class="h-stat">
+          <span class="h-num" data-target="7">0</span>
+          <span class="h-lbl">Districts Covered</span>
+        </div>
+        <div class="h-sep"></div>
+        <div class="h-stat">
+          <span class="h-num" data-target="142">0</span>
+          <span class="h-lbl">Missions Completed</span>
+        </div>
+        <div class="h-sep"></div>
+        <div class="h-stat">
+          <span class="h-num" data-target="1247">0</span>
+          <span class="h-lbl">Lives Protected</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right — Command Card -->
+    <div class="hero-command a-in" style="--d:.1s">
+      <div class="cmd-header">
+        <span class="cmd-title"><i class="fa-solid fa-tower-control" style="margin-right:6px;color:var(--red)"></i> Command Status</span>
+        <span class="cmd-live"><div class="live-dot"></div> Live</span>
+      </div>
+      <div class="cmd-stats">
+        <div class="cmd-stat cst-red">
+          <div class="cmd-stat-n" id="heroActive">3</div>
+          <div class="cmd-stat-l">Active Missions</div>
+        </div>
+        <div class="cmd-stat cst-amber">
+          <div class="cmd-stat-n">7</div>
+          <div class="cmd-stat-l">Teams Standby</div>
+        </div>
+        <div class="cmd-stat cst-green">
+          <div class="cmd-stat-n">142</div>
+          <div class="cmd-stat-l">Completed</div>
+        </div>
+        <div class="cmd-stat cst-blue">
+          <div class="cmd-stat-n">4</div>
+          <div class="cmd-stat-l">Drones Active</div>
+        </div>
+      </div>
+      <div class="cmd-alerts">
+        <div class="cmd-alert">
+          <i class="fa-solid fa-circle al-red"></i>
+          <span>Flood response active — Sylhet North</span>
+          <span class="cmd-alert-badge badge-red">Active</span>
+        </div>
+        <div class="cmd-alert">
+          <i class="fa-solid fa-circle al-amber"></i>
+          <span>Cyclone watch — Cox's Bazar coast</span>
+          <span class="cmd-alert-badge badge-amber">Watch</span>
+        </div>
+        <div class="cmd-alert">
+          <i class="fa-solid fa-circle al-green"></i>
+          <span>Chittagong fire mission — resolved</span>
+          <span class="cmd-alert-badge badge-green">Clear</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-track"></div>
+  </div>
+</section>
+
+<!-- ══ TICKER ══════════════════════════════════════════════ -->
+<div class="ticker">
+  <div class="ticker-badge"><i class="fa-solid fa-tower-broadcast"></i> Emergency Lines</div>
+  <div class="ticker-divider"></div>
+  <div class="ticker-track">
+    <div class="ticker-reel">
+      999 — National Emergency &nbsp;&nbsp;|&nbsp;&nbsp;
+      108 — Ambulance &nbsp;&nbsp;|&nbsp;&nbsp;
+      101 — Fire Brigade &nbsp;&nbsp;|&nbsp;&nbsp;
+      100 — Police &nbsp;&nbsp;|&nbsp;&nbsp;
+      104 — Disaster Management &nbsp;&nbsp;|&nbsp;&nbsp;
+      181 — Women &amp; Children Helpline &nbsp;&nbsp;|&nbsp;&nbsp;
+      1906 — Gas Emergency &nbsp;&nbsp;|&nbsp;&nbsp;
+      16789 — Mental Health &nbsp;&nbsp;|&nbsp;&nbsp;
+      112 — Global Emergency &nbsp;&nbsp;|&nbsp;&nbsp;
+      999 — National Emergency &nbsp;&nbsp;|&nbsp;&nbsp;
+      108 — Ambulance &nbsp;&nbsp;|&nbsp;&nbsp;
+      101 — Fire Brigade &nbsp;&nbsp;|&nbsp;&nbsp;
+      100 — Police &nbsp;&nbsp;|&nbsp;&nbsp;
+      104 — Disaster Management &nbsp;&nbsp;|&nbsp;&nbsp;
+      181 — Women &amp; Children Helpline &nbsp;&nbsp;|&nbsp;&nbsp;
+      1906 — Gas Emergency &nbsp;&nbsp;|&nbsp;&nbsp;
+      16789 — Mental Health &nbsp;&nbsp;|&nbsp;&nbsp;
+      112 — Global Emergency
+    </div>
+  </div>
+</div>
+
+<!-- ══ ABOUT ════════════════════════════════════════════════ -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="s-head reveal">
+      <div class="s-tag">About</div>
+      <h2 class="s-title">What is ITM<br>Rescue Force?</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-card ac-red reveal">
+        <div class="card-ico ico-red"><i class="fa-solid fa-crosshairs"></i></div>
+        <h3>Mission</h3>
+        <p>To create a unified rescue system where human expertise and artificial intelligence work together to save lives in Bangladesh — responding to all natural disasters, accidents, fires, floods and health emergencies with maximum speed and precision.</p>
+      </div>
+      <div class="about-card ac-amber reveal">
+        <div class="card-ico ico-amber"><i class="fa-solid fa-earth-asia"></i></div>
+        <h3>Vision</h3>
+        <p>A future where no one is left behind in a disaster — every human, animal and community receives world-class protection through smart technology, coordinated management and compassionate response from trained rescue professionals.</p>
+      </div>
+      <div class="about-card ac-blue reveal">
+        <div class="card-ico ico-blue"><i class="fa-solid fa-gem"></i></div>
+        <h3>Values</h3>
+        <p>Care. Safety. Honesty. Respect for all living beings. We believe technology guided by strong human values becomes a genuine force for good — and that ITM is the proof. Information Technology plus Management equals lives saved.</p>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top:8px">
+      <div class="itm-tag">
+        <i class="fa-solid fa-circle-nodes"></i>
+        ITM = <strong style="color:var(--text);margin:0 4px">I</strong>nformation
+        <strong style="color:var(--text);margin:0 4px">T</strong>echnology +
+        <strong style="color:var(--text);margin:0 4px">M</strong>anagement
+        &mdash; Together, saving lives.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW IT WORKS ════════════════════════════════════════ -->
+<section class="section section-alt" id="how">
+  <div class="container">
+    <div class="s-head reveal">
+      <div class="s-tag">System</div>
+      <h2 class="s-title">How It Works</h2>
+      <p class="s-body">Three disciplines. One force. Every rescue mission integrates technology, human management, and AI intelligence into a seamless response chain.</p>
+    </div>
+    <div class="pillars reveal">
+      <div class="pillar">
+        <div class="p-ico"><i class="fa-solid fa-laptop-code"></i></div>
+        <div class="p-title">Information Technology</div>
+        <div class="p-sub">/ Digital Infrastructure</div>
+        <ul class="p-list">
+          <li><i class="fa-solid fa-circle-dot"></i> Web platform for emergency reporting</li>
+          <li><i class="fa-solid fa-circle-dot"></i> Real-time GPS location tracking</li>
+          <li><i class="fa-solid fa-circle-dot"></i> UAV drones for aerial reconnaissance</li>
+          <li><i class="fa-solid fa-circle-dot"></i> Secure mission database and logs</li>
+          <li><i class="fa-solid fa-circle-dot"></i> Live command and control dashboard</li>
+        </ul>
+      </div>
+      <div class="pillar pillar-center">
+        <div class="p-ico"><i class="fa-solid fa-clipboard-list"></i></div>
+        <div class="p-title">Management</div>
+        <div class="p-sub">/ Human Coordination</div>
+        <ul class="p-list">
+          <li><i class="fa-solid fa-circle-dot"></i> Defined roles: Commander, Medic, Pilot, Rescuer</li>
+          <li><i class="fa-solid fa-circle-dot"></i> Mission tracking and checklists</li>
+          <li><i class="fa-solid fa-circle-dot"></i> Team scheduling and rotation</li>
+          <li><i class="fa-solid fa-circle-dot"></i> Post-mission debriefs and reports</li>
+          <li><i class="fa-solid fa-circle-dot"></i> Resource and logistics management</li>
+        </ul>
+      </div>
+      <div class="pillar">
+        <div class="p-ico"><i class="fa-solid fa-microchip"></i></div>
+        <div class="p-title">Artificial Intelligence</div>
+        <div class="p-sub">/ Smart Decision Support</div>
+        <ul class="p-list">
+          <li><i class="fa-solid fa-circle-dot"></i> Route optimization and risk mapping</li>
+          <li><i class="fa-solid fa-circle-dot"></i> Flood and cyclone forecasting</li>
+          <li><i class="fa-solid fa-circle-dot"></i> Smart resource allocation</li>
+          <li><i class="fa-solid fa-circle-dot"></i> RescueGPT — offline AI assistant</li>
+          <li><i class="fa-solid fa-circle-dot"></i> Team training simulations</li>
+        </ul>
+      </div>
+    </div>
+    <div class="flow reveal">
+      <div class="flow-node"><div class="flow-ico"><i class="fa-solid fa-bullhorn"></i></div><div class="flow-lbl">Emergency<br>Report</div></div>
+      <div class="flow-arr"><i class="fa-solid fa-chevron-right"></i></div>
+      <div class="flow-node"><div class="flow-ico"><i class="fa-solid fa-brain"></i></div><div class="flow-lbl">AI + HQ<br>Analysis</div></div>
+      <div class="flow-arr"><i class="fa-solid fa-chevron-right"></i></div>
+      <div class="flow-node"><div class="flow-ico"><i class="fa-solid fa-person-running"></i></div><div class="flow-lbl">Team<br>Dispatch</div></div>
+      <div class="flow-arr"><i class="fa-solid fa-chevron-right"></i></div>
+      <div class="flow-node"><div class="flow-ico"><i class="fa-solid fa-shield-heart"></i></div><div class="flow-lbl">Rescue<br>Operation</div></div>
+      <div class="flow-arr"><i class="fa-solid fa-chevron-right"></i></div>
+      <div class="flow-node"><div class="flow-ico"><i class="fa-solid fa-file-circle-check"></i></div><div class="flow-lbl">Mission<br>Report</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TEAM ════════════════════════════════════════════════ -->
+<section class="section" id="team">
+  <div class="container">
+    <div class="s-head reveal">
+      <div class="s-tag">Personnel</div>
+      <h2 class="s-title">Our Rescue Force</h2>
+      <p class="s-body">Six specialized roles. One coordinated mission. Every team member trained for their specific function in the emergency response chain.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="t-avatar"><i class="fa-solid fa-user-tie"></i></div>
+        <h3 class="t-name">Commander</h3>
+        <span class="t-role">Mission Leader</span>
+        <p class="t-desc">Guides all rescue operations, makes rapid tactical decisions, and coordinates ground and air units. Commands with composure under extreme pressure.</p>
+        <div class="t-status st-online"><i class="fa-solid fa-circle"></i> Available</div>
+      </div>
+      <div class="team-card reveal">
+        <div class="t-avatar"><i class="fa-solid fa-user-doctor"></i></div>
+        <h3 class="t-name">Medic Team</h3>
+        <span class="t-role">First Aid &amp; Medical Care</span>
+        <p class="t-desc">Delivers immediate emergency medical response — CPR, wound management, patient stabilization, and triage in active disaster zones.</p>
+        <div class="t-status st-mission"><i class="fa-solid fa-circle"></i> On Mission</div>
+      </div>
+      <div class="team-card reveal">
+        <div class="t-avatar"><i class="fa-solid fa-helicopter"></i></div>
+        <h3 class="t-name">Drone Pilot</h3>
+        <span class="t-role">Aerial Operations</span>
+        <p class="t-desc">Operates UAVs for search and rescue, thermal imaging, live surveillance, and precision supply delivery to inaccessible locations.</p>
+        <div class="t-status st-standby"><i class="fa-solid fa-circle"></i> Standby</div>
+      </div>
+      <div class="team-card reveal">
+        <div class="t-avatar"><i class="fa-solid fa-person-shelter"></i></div>
+        <h3 class="t-name">Field Rescuer</h3>
+        <span class="t-role">On-Ground Operations</span>
+        <p class="t-desc">Enters disaster zones directly, extracts trapped survivors, and performs physical rescue in the most hazardous conditions.</p>
+        <div class="t-status st-mission"><i class="fa-solid fa-circle"></i> On Mission</div>
+      </div>
+      <div class="team-card reveal">
+        <div class="t-avatar"><i class="fa-solid fa-satellite-dish"></i></div>
+        <h3 class="t-name">Comms Officer</h3>
+        <span class="t-role">Communications Hub</span>
+        <p class="t-desc">Manages all radio communications, public alert broadcasts, media coordination, and inter-agency liaison during active missions.</p>
+        <div class="t-status st-online"><i class="fa-solid fa-circle"></i> Available</div>
+      </div>
+      <div class="team-card reveal">
+        <div class="t-avatar"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+        <h3 class="t-name">Engineer Team</h3>
+        <span class="t-role">Technical Support</span>
+        <p class="t-desc">Maintains all vehicles, drones, and equipment in peak operational condition. Designs and deploys technical solutions for complex rescue scenarios.</p>
+        <div class="t-status st-standby"><i class="fa-solid fa-circle"></i> Standby</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ REPORT EMERGENCY ════════════════════════════════════ -->
+<section class="section section-accent" id="report" style="background:var(--red)">
+  <div class="container">
+    <div class="s-head reveal">
+      <div class="s-tag lt">Emergency Reporting</div>
+      <h2 class="s-title lt">Report an Emergency</h2>
+      <p class="s-body lt">For immediate life-threatening danger, call <strong>999</strong> first — do not wait. Use this form for structured incident reporting and non-critical situations.</p>
+    </div>
+    <div class="report-shell">
+      <form class="form-wrap" id="emergencyForm">
+        <div class="form-row">
+          <div class="f-group">
+            <label class="f-label"><i class="fa-solid fa-user"></i> Your Name <span class="f-opt">(optional)</span></label>
+            <input type="text" id="repName" placeholder="e.g. Mohammad Hasan"/>
+          </div>
+          <div class="f-group">
+            <label class="f-label"><i class="fa-solid fa-phone"></i> Phone Number <span class="f-opt">(optional)</span></label>
+            <input type="tel" id="repPhone" placeholder="01XXXXXXXXX"/>
+          </div>
+        </div>
+        <div class="f-group">
+          <label class="f-label"><i class="fa-solid fa-triangle-exclamation"></i> Emergency Type *</label>
+          <select id="repType" required>
+            <option value="">-- Select Emergency Type --</option>
+            <option value="fire">Fire / Explosion</option>
+            <option value="flood">Flood / Water Emergency</option>
+            <option value="accident">Road Accident</option>
+            <option value="health">Health / Medical Emergency</option>
+            <option value="cyclone">Cyclone / Storm</option>
+            <option value="earthquake">Earthquake / Building Collapse</option>
+            <option value="gasleak">Gas Leak</option>
+            <option value="animal">Animal Rescue</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="f-group">
+          <label class="f-label"><i class="fa-solid fa-location-dot"></i> Location *</label>
+          <div class="loc-row">
+            <input type="text" id="repLocation" placeholder="Address, area name, or landmark" required/>
+            <button type="button" class="btn-gps" id="btnGPS" onclick="getLocation()">
+              <i class="fa-solid fa-crosshairs"></i> GPS
+            </button>
+          </div>
+          <div id="locInfo" class="loc-info"></div>
+        </div>
+        <div class="f-group">
+          <label class="f-label"><i class="fa-solid fa-comment-dots"></i> Description *</label>
+          <textarea id="repDesc" rows="4" placeholder="What is happening? How many people are involved? Any injuries? Describe clearly..." required></textarea>
+        </div>
+        <div class="f-group">
+          <label class="f-label"><i class="fa-solid fa-gauge-high"></i> Severity Level</label>
+          <div class="sev-row">
+            <label class="sev-opt"><input type="radio" name="severity" value="low"/><span class="sev-pill sev-low">Low</span></label>
+            <label class="sev-opt"><input type="radio" name="severity" value="medium" checked/><span class="sev-pill sev-medium">Medium</span></label>
+            <label class="sev-opt"><input type="radio" name="severity" value="high"/><span class="sev-pill sev-high">High</span></label>
+            <label class="sev-opt"><input type="radio" name="severity" value="critical"/><span class="sev-pill sev-critical">Critical</span></label>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit">
+          <i class="fa-solid fa-paper-plane"></i> Submit Emergency Report
+        </button>
+      </form>
+      <div class="success-card" id="reportSuccess" style="display:none">
+        <div class="success-ico-wrap"><i class="fa-solid fa-check"></i></div>
+        <h3>Report Received</h3>
+        <p>Your emergency report has been logged and our team has been notified.</p>
+        <p style="font-size:.88rem;color:rgba(255,255,255,.7)">For immediate danger, always call <strong>999</strong> first.</p>
+        <div class="report-pill" id="reportId"></div>
+        <button onclick="resetForm()" class="btn btn-ghost" style="margin-top:16px;border-color:rgba(255,255,255,.3);color:#fff;">
+          <i class="fa-solid fa-rotate-left"></i> Submit Another Report
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DASHBOARD ═══════════════════════════════════════════ -->
+<section class="section section-dark" id="dashboard">
+  <div class="container">
+    <div class="s-head reveal">
+      <div class="s-tag">Operations</div>
+      <h2 class="s-title">Live Dashboard</h2>
+    </div>
+    <div class="stat-row reveal">
+      <div class="d-stat ds-r">
+        <div class="d-ico"><i class="fa-solid fa-fire"></i></div>
+        <span class="d-num" id="activeCount">3</span>
+        <span class="d-lbl">Active Missions</span>
+      </div>
+      <div class="d-stat ds-a">
+        <div class="d-ico"><i class="fa-solid fa-users"></i></div>
+        <span class="d-num">7</span>
+        <span class="d-lbl">Teams on Standby</span>
+      </div>
+      <div class="d-stat ds-g">
+        <div class="d-ico"><i class="fa-solid fa-circle-check"></i></div>
+        <span class="d-num">142</span>
+        <span class="d-lbl">Missions Completed</span>
+      </div>
+      <div class="d-stat ds-b">
+        <div class="d-ico"><i class="fa-solid fa-helicopter"></i></div>
+        <span class="d-num">4</span>
+        <span class="d-lbl">Drones Deployed</span>
+      </div>
+    </div>
+    <div class="map-wrap reveal">
+      <div class="map-badge"><i class="fa-solid fa-map-location-dot"></i> Mission Coverage — Bangladesh</div>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3648891.5!2d90.35631!3d23.68499!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1693900000000!5m2!1sen!2sbd" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="ITM Rescue Force Operations Map"></iframe>
+    </div>
+    <div class="tracker-wrap reveal">
+      <h3 class="tracker-head"><i class="fa-solid fa-table-list"></i> Team Status Tracker</h3>
+      <table class="t-table">
+        <thead>
+          <tr><th>Name</th><th>Role</th><th>District</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Cmdr. Rafiq</td><td>Commander</td><td>Dhaka</td><td><span class="status-chip sc-mission"><i class="fa-solid fa-circle"></i> On Mission</span></td></tr>
+          <tr><td>Dr. Nadia Islam</td><td>Medic Lead</td><td>Dhaka</td><td><span class="status-chip sc-mission"><i class="fa-solid fa-circle"></i> On Mission</span></td></tr>
+          <tr><td>Pilot Arif</td><td>Drone Pilot</td><td>Comilla</td><td><span class="status-chip sc-mission"><i class="fa-solid fa-circle"></i> On Mission</span></td></tr>
+          <tr><td>Rescuer Sumon</td><td>Field Rescuer</td><td>Chittagong</td><td><span class="status-chip sc-available"><i class="fa-solid fa-circle"></i> Available</span></td></tr>
+          <tr><td>Comms Bristy</td><td>Comms Officer</td><td>Sylhet</td><td><span class="status-chip sc-standby"><i class="fa-solid fa-circle"></i> Standby</span></td></tr>
+          <tr><td>Eng. Kamal</td><td>Engineer</td><td>Rajshahi</td><td><span class="status-chip sc-available"><i class="fa-solid fa-circle"></i> Available</span></td></tr>
+        </tbody>
+      </table>
+      <div class="tracker-ts"><i class="fa-solid fa-clock"></i> Last updated: <span id="lastUpdate"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ RESCUEGPT ═══════════════════════════════════════════ -->
+<section class="section" id="rescuegpt">
+  <div class="container">
+    <div class="s-head reveal">
+      <div class="s-tag">AI Assistant</div>
+      <h2 class="s-title">RescueGPT</h2>
+      <p class="s-body">A fully offline AI emergency assistant — no internet, no API, no server. Powered by an intelligent knowledge engine with <span id="topicCountDisplay">20</span>+ emergency topics, built right into your browser.</p>
+    </div>
+    <div class="chat-wrap reveal">
+      <!-- Header -->
+      <div class="chat-hdr">
+        <div class="chat-bot-ico"><i class="fa-solid fa-robot"></i></div>
+        <div class="chat-hdr-info">
+          <div class="chat-bot-name">RescueGPT — Emergency AI Assistant</div>
+          <div class="chat-bot-sub">
+            <div class="online-dot"></div>
+            Online &nbsp;&middot;&nbsp; Fully Offline &nbsp;&middot;&nbsp; No Internet Required
+          </div>
+        </div>
+        <span class="chat-offline-badge"><i class="fa-solid fa-wifi" style="text-decoration:line-through"></i> Offline AI</span>
+        <button class="chat-clear-btn" onclick="clearChat()" title="Clear conversation"><i class="fa-solid fa-trash-can"></i></button>
+      </div>
+
+      <!-- Messages -->
+      <div class="chat-body" id="chatBody"></div>
+
+      <!-- Quick buttons -->
+      <div class="chat-quick" id="chatQuick"></div>
+
+      <!-- Input -->
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" placeholder="Ask about flood safety, CPR, fire emergency, cyclone, first aid..." onkeydown="if(event.key==='Enter' && !event.shiftKey){event.preventDefault();sendMsg();}"/>
+        <button class="chat-send-btn" id="sendBtn" onclick="sendMsg()">
+          <i class="fa-solid fa-paper-plane"></i> Send
+        </button>
+      </div>
+      <div class="chat-disc">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        RescueGPT provides guidance only — not a substitute for emergency services.
+        For life-threatening emergencies: <strong>call 999 immediately.</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FIRST AID ════════════════════════════════════════════ -->
+<section class="section section-alt" id="firstaid">
+  <div class="container">
+    <div class="s-head reveal">
+      <div class="s-tag">Knowledge</div>
+      <h2 class="s-title">Quick First Aid Reference</h2>
+      <p class="s-body">Essential procedures every person should know. Ask RescueGPT for detailed step-by-step guides on any of these topics.</p>
+    </div>
+    <div class="aid-grid">
+      <div class="aid-card reveal">
+        <div class="aid-ico"><i class="fa-solid fa-droplet"></i></div>
+        <h4>Severe Bleeding</h4>
+        <p>Apply firm direct pressure with clean cloth. Elevate limb above heart. If blood soaks through, add more cloth on top. Maintain pressure for 15 minutes. Call 108.</p>
+      </div>
+      <div class="aid-card reveal">
+        <div class="aid-ico"><i class="fa-solid fa-fire-flame-curved"></i></div>
+        <h4>Burns</h4>
+        <p>Cool under cold running water for 20 minutes. Never use ice, butter or cream. Remove jewelry near burn. Cover loosely with clean bandage. Call 108 for large burns.</p>
+      </div>
+      <div class="aid-card reveal">
+        <div class="aid-ico"><i class="fa-solid fa-lungs"></i></div>
+        <h4>Choking</h4>
+        <p>Encourage forceful coughing. Give 5 firm back blows between shoulder blades. Follow with 5 abdominal thrusts (Heimlich). Call 999 if object remains lodged.</p>
+      </div>
+      <div class="aid-card reveal">
+        <div class="aid-ico"><i class="fa-solid fa-heart-pulse"></i></div>
+        <h4>CPR</h4>
+        <p>Call 108 first. 30 compressions at 100-120/min, 5cm deep. Then 2 rescue breaths. Continue 30:2 cycle until ambulance arrives. Compression-only CPR is also effective.</p>
+      </div>
+      <div class="aid-card reveal">
+        <div class="aid-ico"><i class="fa-solid fa-temperature-high"></i></div>
+        <h4>Heatstroke</h4>
+        <p>Move to cool shade immediately. Apply ice packs to neck, armpits, groin. Fan continuously. If conscious, give small sips of water. Call 108 — heatstroke is life-threatening.</p>
+      </div>
+      <div class="aid-card reveal">
+        <div class="aid-ico"><i class="fa-solid fa-shield-virus"></i></div>
+        <h4>Snake Bite</h4>
+        <p>Keep victim calm and still. Immobilize bitten limb below heart. Remove jewelry. Go to hospital within 4 hours for antivenom. Never cut, suck, or apply ice to wound.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ═══════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="nav-brand">
+        <div class="nav-crest"><i class="fa-solid fa-shield-halved"></i></div>
+        <span class="nav-wordmark">ITM<span>RESCUE</span>FORCE</span>
+      </div>
+      <p>Emergency response powered by Information Technology, Management and Artificial Intelligence. Protecting lives and communities across Bangladesh — 24 hours a day.</p>
+    </div>
+    <div class="footer-col">
+      <h4><i class="fa-solid fa-link"></i> Navigation</h4>
+      <div class="footer-links-list">
+        <a href="#home"><i class="fa-solid fa-chevron-right"></i> Home</a>
+        <a href="#about"><i class="fa-solid fa-chevron-right"></i> About</a>
+        <a href="#how"><i class="fa-solid fa-chevron-right"></i> How It Works</a>
+        <a href="#team"><i class="fa-solid fa-chevron-right"></i> Team</a>
+        <a href="#report"><i class="fa-solid fa-chevron-right"></i> Report Emergency</a>
+        <a href="#rescuegpt"><i class="fa-solid fa-chevron-right"></i> RescueGPT AI</a>
+        <a href="admin.html"><i class="fa-solid fa-chevron-right"></i> Admin Panel</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4><i class="fa-solid fa-address-card"></i> Contact</h4>
+      <p class="f-contact-line"><i class="fa-solid fa-envelope"></i> itmrescueforce@gmail.com</p>
+      <p class="f-contact-line"><i class="fa-solid fa-phone"></i> 999 (Emergency)</p>
+      <p class="f-contact-line"><i class="fa-solid fa-building-columns"></i> ITM Dept, Bangladesh</p>
+      <p class="f-contact-line"><i class="fa-solid fa-globe"></i> itmrescueforce.gov.bd</p>
+    </div>
+    <div class="footer-col">
+      <h4><i class="fa-solid fa-phone-volume"></i> Emergency Numbers</h4>
+      <div class="f-hotline"><i class="fa-solid fa-circle"></i> 999 — National Emergency</div>
+      <div class="f-hotline"><i class="fa-solid fa-circle"></i> 108 — Ambulance</div>
+      <div class="f-hotline"><i class="fa-solid fa-circle"></i> 101 — Fire Brigade</div>
+      <div class="f-hotline"><i class="fa-solid fa-circle"></i> 100 — Police</div>
+      <div class="f-hotline"><i class="fa-solid fa-circle"></i> 104 — Disaster Management</div>
+      <div class="f-hotline"><i class="fa-solid fa-circle"></i> 112 — Global Emergency</div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    Developed by ITM Rescue Force &nbsp;&middot;&nbsp;
+    Powered by IT, Management &amp; AI &nbsp;&middot;&nbsp;
+    RescueGPT is 100% offline &nbsp;&middot;&nbsp;
+    &copy; 2025 All Rights Reserved
+  </div>
+</footer>
+
+<!-- SOS Float Button -->
+<a href="tel:999" class="sos-btn">
+  <i class="fa-solid fa-phone-volume"></i> Call 999
+</a>
+
+<script src="rescuegpt-engine.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

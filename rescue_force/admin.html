@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel — ITM Rescue Force</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ══ LOGIN ═══════════════════════════════════════════════ -->
+<div id="loginOverlay" style="position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:var(--surface);border:1px solid var(--amber);border-radius:var(--r-xl);padding:46px;width:100%;max-width:400px;text-align:center;">
+    <div style="width:58px;height:58px;background:rgba(230,168,0,.1);border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--amber);margin:0 auto 20px;">
+      <i class="fa-solid fa-shield-halved"></i>
+    </div>
+    <h2 style="font-family:var(--f-display);font-size:1.85rem;color:var(--text);margin-bottom:6px;">Admin Access</h2>
+    <p style="color:var(--text-2);font-size:.84rem;margin-bottom:28px;">ITM Rescue Force Control Panel</p>
+    <div style="display:flex;flex-direction:column;gap:13px;text-align:left;">
+      <div>
+        <label style="font-family:var(--f-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-3);display:block;margin-bottom:5px;">Username</label>
+        <input id="adminUser" type="text" placeholder="Enter username" onkeydown="if(event.key==='Enter')adminLogin()"
+          style="width:100%;background:var(--input-bg);border:1.5px solid var(--border-md);border-radius:var(--r-md);padding:11px 13px;color:var(--text);font-family:var(--f-body);font-size:.9rem;outline:none;transition:border-color .2s;"
+          onfocus="this.style.borderColor='var(--amber)'" onblur="this.style.borderColor='var(--border-md)'"/>
+      </div>
+      <div>
+        <label style="font-family:var(--f-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-3);display:block;margin-bottom:5px;">Password</label>
+        <input id="adminPass" type="password" placeholder="Enter password" onkeydown="if(event.key==='Enter')adminLogin()"
+          style="width:100%;background:var(--input-bg);border:1.5px solid var(--border-md);border-radius:var(--r-md);padding:11px 13px;color:var(--text);font-family:var(--f-body);font-size:.9rem;outline:none;transition:border-color .2s;"
+          onfocus="this.style.borderColor='var(--amber)'" onblur="this.style.borderColor='var(--border-md)'"/>
+      </div>
+    </div>
+    <div id="loginErr" style="color:var(--red);font-family:var(--f-mono);font-size:.72rem;margin-top:10px;display:none;">
+      <i class="fa-solid fa-circle-exclamation"></i> Invalid credentials — try: admin / rescue2025
+    </div>
+    <button onclick="adminLogin()" style="width:100%;margin-top:18px;padding:13px;border:none;background:var(--amber);color:var(--bg);font-family:var(--f-display);font-size:1rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:var(--r-md);cursor:pointer;transition:background .2s;" onmouseover="this.style.background='var(--amber-dim)'" onmouseout="this.style.background='var(--amber)'">
+      <i class="fa-solid fa-right-to-bracket"></i> Login to Admin Panel
+    </button>
+    <a href="index.html" style="display:block;margin-top:14px;color:var(--text-3);font-size:.8rem;transition:color .2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-3)'">
+      <i class="fa-solid fa-arrow-left"></i> Back to main site
+    </a>
+    <p style="color:var(--text-3);font-family:var(--f-mono);font-size:.62rem;margin-top:18px;letter-spacing:.12em;">DEMO: admin / rescue2025</p>
+  </div>
+</div>
+
+<!-- ══ ADMIN CONTENT ════════════════════════════════════════ -->
+<div id="adminContent" style="display:none">
+
+<!-- Header -->
+<header class="admin-hdr">
+  <div style="display:flex;align-items:center;gap:12px;">
+    <div class="nav-crest" style="width:32px;height:32px;background:var(--amber);box-shadow:none;font-size:.85rem;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;color:var(--bg);">
+      <i class="fa-solid fa-shield-halved"></i>
+    </div>
+    <span class="nav-wordmark" style="font-size:1.15rem;">ITM<span style="color:var(--amber)">RESCUE</span>FORCE</span>
+    <span class="admin-badge">Control Panel</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <div style="font-family:var(--f-mono);font-size:.68rem;color:var(--text-3);" id="adminClock"></div>
+    <button class="icon-btn" id="adminTheme" aria-label="Toggle theme">
+      <i class="fa-solid fa-sun"  id="aIconSun"></i>
+      <i class="fa-solid fa-moon" id="aIconMoon" style="display:none"></i>
+    </button>
+    <a href="index.html" style="color:var(--text-3);font-size:.8rem;display:flex;align-items:center;gap:5px;transition:color .2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-3)'">
+      <i class="fa-solid fa-arrow-left"></i> Main Site
+    </a>
+    <button onclick="adminLogout()" style="background:var(--red);color:#fff;border:none;padding:8px 14px;border-radius:var(--r-md);cursor:pointer;font-size:.78rem;font-weight:700;display:flex;align-items:center;gap:6px;font-family:var(--f-body);">
+      <i class="fa-solid fa-right-from-bracket"></i> Logout
+    </button>
+  </div>
+</header>
+
+<div class="admin-layout">
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="a-ns">Operations</div>
+    <div class="a-ni active" onclick="showPanel('vehicles')"><i class="fa-solid fa-truck-medical"></i> Vehicle Dispatch</div>
+    <div class="a-ni" onclick="showPanel('drone')"><i class="fa-solid fa-helicopter"></i> Drone Control</div>
+    <div class="a-ni" onclick="showPanel('mission')"><i class="fa-solid fa-clipboard-list"></i> Mission Log</div>
+    <div class="a-ni" onclick="showPanel('reports')"><i class="fa-solid fa-inbox"></i> Emergency Reports</div>
+    <div class="a-ns">Management</div>
+    <div class="a-ni" onclick="showPanel('team')"><i class="fa-solid fa-users"></i> Team Status</div>
+    <div class="a-ni" onclick="showPanel('resources')"><i class="fa-solid fa-boxes-stacked"></i> Resources</div>
+    <div class="a-ns">Intelligence</div>
+    <div class="a-ni" onclick="showPanel('ai')"><i class="fa-solid fa-brain"></i> AI Coordination</div>
+    <div class="a-ni" onclick="showPanel('analytics')"><i class="fa-solid fa-chart-bar"></i> Analytics</div>
+  </aside>
+
+  <!-- Main -->
+  <main class="admin-main">
+
+    <!-- Vehicle Dispatch -->
+    <div class="admin-panel active" id="panel-vehicles">
+      <div class="a-title">Vehicle Dispatch Control</div>
+      <p class="a-sub">Deploy AI-coordinated rescue vehicles to active emergency zones.</p>
+      <div class="alert-info"><i class="fa-solid fa-circle-info"></i> Demo Mode — No real vehicles are dispatched. This demonstrates the ITM Rescue Force command system.</div>
+      <div class="v-grid">
+        <div class="v-card">
+          <div class="v-ico vi-red"><i class="fa-solid fa-truck-medical"></i></div>
+          <div class="v-name">AI Ambulance Unit</div>
+          <p class="v-desc">Smart ambulance with AI navigation, real-time hospital coordination, and optimized routing for fastest medical response.</p>
+          <ul class="v-feats">
+            <li><i class="fa-solid fa-check"></i> Smart GPS route optimization</li>
+            <li><i class="fa-solid fa-check"></i> Hospital pre-alert system</li>
+            <li><i class="fa-solid fa-check"></i> Onboard medical AI support</li>
+            <li><i class="fa-solid fa-check"></i> Patient vitals monitoring</li>
+          </ul>
+          <div class="disp-st sr" id="st-ambulance"><i class="fa-solid fa-circle fa-xs"></i> DISPATCHED — En route to Dhaka Medical</div>
+          <button class="launch-btn lb-r" id="btn-ambulance" onclick="launchVehicle('ambulance')"><i class="fa-solid fa-truck-medical"></i> Launch Ambulance</button>
+        </div>
+        <div class="v-card">
+          <div class="v-ico vi-red"><i class="fa-solid fa-fire-extinguisher"></i></div>
+          <div class="v-name">AI Fire Rescue Unit</div>
+          <p class="v-desc">Advanced fire truck with AI resource management, drone-assisted fire mapping, and smart foam/water deployment systems.</p>
+          <ul class="v-feats">
+            <li><i class="fa-solid fa-check"></i> AI water and foam optimization</li>
+            <li><i class="fa-solid fa-check"></i> Drone-integrated fire mapping</li>
+            <li><i class="fa-solid fa-check"></i> Thermal imaging integration</li>
+            <li><i class="fa-solid fa-check"></i> Hazmat detection sensors</li>
+          </ul>
+          <div class="disp-st sr" id="st-fire"><i class="fa-solid fa-circle fa-xs"></i> DISPATCHED — Fire unit en route</div>
+          <button class="launch-btn lb-r" id="btn-fire" onclick="launchVehicle('fire')"><i class="fa-solid fa-fire-extinguisher"></i> Launch Fire Unit</button>
+        </div>
+        <div class="v-card">
+          <div class="v-ico vi-amber"><i class="fa-solid fa-helicopter"></i></div>
+          <div class="v-name">Rescue Helicopter</div>
+          <p class="v-desc">Air rescue unit for remote or elevated disaster zones. Equipped with hoist system, medical crew and thermal survivor detection.</p>
+          <ul class="v-feats">
+            <li><i class="fa-solid fa-check"></i> Remote area access capability</li>
+            <li><i class="fa-solid fa-check"></i> Aerial hoist rescue system</li>
+            <li><i class="fa-solid fa-check"></i> Thermal survivor detection</li>
+            <li><i class="fa-solid fa-check"></i> Live command video link</li>
+          </ul>
+          <div class="disp-st sa" id="st-helicopter"><i class="fa-solid fa-circle fa-xs"></i> DISPATCHED — Helicopter airborne</div>
+          <button class="launch-btn lb-a" id="btn-helicopter" onclick="launchVehicle('helicopter')"><i class="fa-solid fa-helicopter"></i> Launch Helicopter</button>
+        </div>
+        <div class="v-card">
+          <div class="v-ico vi-blue"><i class="fa-solid fa-sailboat"></i></div>
+          <div class="v-name">Flood Rescue Boat</div>
+          <p class="v-desc">High-speed rescue boat for flood and river emergencies. 20-person rescue capacity with sonar depth scanner and emergency supplies.</p>
+          <ul class="v-feats">
+            <li><i class="fa-solid fa-check"></i> High-speed flood navigation</li>
+            <li><i class="fa-solid fa-check"></i> 20-person rescue capacity</li>
+            <li><i class="fa-solid fa-check"></i> Sonar depth scanner</li>
+            <li><i class="fa-solid fa-check"></i> Emergency supply storage</li>
+          </ul>
+          <div class="disp-st sb" id="st-boat"><i class="fa-solid fa-circle fa-xs"></i> DISPATCHED — Boat en route to flood zone</div>
+          <button class="launch-btn lb-b" id="btn-boat" onclick="launchVehicle('boat')"><i class="fa-solid fa-sailboat"></i> Launch Rescue Boat</button>
+        </div>
+      </div>
+      <div class="mission-log-box">
+        <h3><i class="fa-solid fa-list-check"></i> Dispatch Log</h3>
+        <div id="dispatchLog">
+          <div class="log-row"><div class="log-dot ld-g"></div><span class="log-time">System</span><span class="log-txt">All vehicles standing by. Command system initialized.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Drone Control -->
+    <div class="admin-panel" id="panel-drone">
+      <div class="a-title">Drone Command Center</div>
+      <p class="a-sub">Deploy surveillance and rescue UAVs to active mission zones.</p>
+      <div class="v-grid">
+        <div class="v-card">
+          <div class="v-ico vi-blue"><i class="fa-solid fa-eye"></i></div>
+          <div class="v-name">Surveillance Drone Alpha</div>
+          <p class="v-desc">High-altitude 4K surveillance drone with 12km range for real-time disaster zone monitoring and aerial coordination.</p>
+          <ul class="v-feats">
+            <li><i class="fa-solid fa-check"></i> 4K live video stream</li>
+            <li><i class="fa-solid fa-check"></i> 12km operational range</li>
+            <li><i class="fa-solid fa-check"></i> Night vision capability</li>
+            <li><i class="fa-solid fa-check"></i> 45-min flight endurance</li>
+          </ul>
+          <div class="disp-st sb" id="st-alpha"><i class="fa-solid fa-circle fa-xs"></i> AIRBORNE — Streaming live from Zone 3</div>
+          <button class="launch-btn lb-b" id="btn-alpha" onclick="launchDrone('alpha')"><i class="fa-solid fa-helicopter"></i> Launch Drone Alpha</button>
+        </div>
+        <div class="v-card">
+          <div class="v-ico vi-amber"><i class="fa-solid fa-temperature-half"></i></div>
+          <div class="v-name">Thermal Search Drone Beta</div>
+          <p class="v-desc">Specialized thermal imaging drone to locate trapped survivors through smoke, debris, and complete darkness.</p>
+          <ul class="v-feats">
+            <li><i class="fa-solid fa-check"></i> Thermal infrared camera</li>
+            <li><i class="fa-solid fa-check"></i> Through-smoke detection</li>
+            <li><i class="fa-solid fa-check"></i> GPS survivor pinpointing</li>
+            <li><i class="fa-solid fa-check"></i> Audio alert speaker</li>
+          </ul>
+          <div class="disp-st sa" id="st-beta"><i class="fa-solid fa-circle fa-xs"></i> AIRBORNE — Thermal scan active</div>
+          <button class="launch-btn lb-a" id="btn-beta" onclick="launchDrone('beta')"><i class="fa-solid fa-temperature-half"></i> Launch Thermal Drone</button>
+        </div>
+        <div class="v-card">
+          <div class="v-ico vi-green"><i class="fa-solid fa-box-open"></i></div>
+          <div class="v-name">Supply Drone Gamma</div>
+          <p class="v-desc">Heavy-lift delivery drone for emergency supplies to inaccessible locations — 5kg payload with precision GPS drop.</p>
+          <ul class="v-feats">
+            <li><i class="fa-solid fa-check"></i> 5kg payload capacity</li>
+            <li><i class="fa-solid fa-check"></i> Precision GPS delivery</li>
+            <li><i class="fa-solid fa-check"></i> Auto-return safety mode</li>
+            <li><i class="fa-solid fa-check"></i> Weather-resistant design</li>
+          </ul>
+          <div class="disp-st sg" id="st-gamma"><i class="fa-solid fa-circle fa-xs"></i> AIRBORNE — Supply drop in progress</div>
+          <button class="launch-btn lb-g" id="btn-gamma" onclick="launchDrone('gamma')"><i class="fa-solid fa-box-open"></i> Launch Supply Drone</button>
+        </div>
+      </div>
+      <div class="feed-box">
+        <div class="feed-hdr">
+          <span><i class="fa-solid fa-satellite-dish"></i> Drone Live Feed — Zone 3 (Dhaka North)</span>
+          <span class="feed-sig" id="feedSig"><i class="fa-solid fa-circle fa-xs"></i> No Signal</span>
+        </div>
+        <div class="feed-body" id="feedBody">
+          <i class="fa-solid fa-camera"></i>
+          <span>Launch a drone to activate live feed</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mission Log -->
+    <div class="admin-panel" id="panel-mission">
+      <div class="a-title">Mission Log</div>
+      <p class="a-sub">Complete operational history of all rescue missions.</p>
+      <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+        <button onclick="filterMissions('all')" class="launch-btn lb-b" style="width:auto;padding:9px 18px;font-size:.85rem;"><i class="fa-solid fa-list"></i> All</button>
+        <button onclick="filterMissions('active')" class="launch-btn lb-r" style="width:auto;padding:9px 18px;font-size:.85rem;"><i class="fa-solid fa-circle-dot"></i> Active</button>
+        <button onclick="filterMissions('completed')" class="launch-btn lb-g" style="width:auto;padding:9px 18px;font-size:.85rem;"><i class="fa-solid fa-check"></i> Completed</button>
+      </div>
+      <div class="tracker-wrap">
+        <table class="t-table">
+          <thead><tr><th>Mission ID</th><th>Type</th><th>Location</th><th>Team</th><th>Started</th><th>Status</th></tr></thead>
+          <tbody id="missionBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Emergency Reports -->
+    <div class="admin-panel" id="panel-reports">
+      <div class="a-title">Emergency Reports</div>
+      <p class="a-sub">All incidents submitted through the public emergency form.</p>
+      <div class="tracker-wrap">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+          <span style="color:var(--text-2);font-size:.84rem;" id="reportCount">Loading...</span>
+          <button onclick="clearReports()" style="background:none;border:1px solid var(--red);color:var(--red);padding:6px 13px;border-radius:var(--r-md);cursor:pointer;font-size:.78rem;display:flex;align-items:center;gap:6px;font-family:var(--f-body);">
+            <i class="fa-solid fa-trash"></i> Clear All
+          </button>
+        </div>
+        <div id="reportsContainer"></div>
+      </div>
+    </div>
+
+    <!-- Team Status -->
+    <div class="admin-panel" id="panel-team">
+      <div class="a-title">Team Status Management</div>
+      <p class="a-sub">View and update field team member status in real time.</p>
+      <div class="tracker-wrap">
+        <table class="t-table">
+          <thead><tr><th>Name</th><th>Role</th><th>District</th><th>Contact</th><th>Status</th><th>Update</th></tr></thead>
+          <tbody id="teamBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Resources -->
+    <div class="admin-panel" id="panel-resources">
+      <div class="a-title">Resource Inventory</div>
+      <p class="a-sub">Track all equipment, vehicles, and emergency supplies across all units.</p>
+      <div class="res-grid" id="resourceGrid"></div>
+    </div>
+
+    <!-- AI Coordination -->
+    <div class="admin-panel" id="panel-ai">
+      <div class="a-title">AI Smart Coordination</div>
+      <p class="a-sub">AI-powered mission intelligence and decision support — fully offline, no internet required.</p>
+      <div class="ai-quad">
+        <div class="ai-card">
+          <div class="ai-card-ico"><i class="fa-solid fa-route"></i></div>
+          <h4>Route Optimizer</h4>
+          <p>AI calculates the fastest, safest routes to all active emergency zones, avoiding traffic and road hazards.</p>
+          <div class="ai-result" id="res-route"></div>
+          <button class="launch-btn lb-b" style="font-size:.85rem;padding:9px;" onclick="runAI('route')"><i class="fa-solid fa-play"></i> Run Route Analysis</button>
+        </div>
+        <div class="ai-card">
+          <div class="ai-card-ico"><i class="fa-solid fa-water"></i></div>
+          <h4>Flood Risk Predictor</h4>
+          <p>Analyzes weather patterns, river levels, and topographic data to predict high-risk zones in the next 24 hours.</p>
+          <div class="ai-result ay" id="res-flood"></div>
+          <button class="launch-btn lb-a" style="font-size:.85rem;padding:9px;" onclick="runAI('flood')"><i class="fa-solid fa-play"></i> Run Flood Prediction</button>
+        </div>
+        <div class="ai-card">
+          <div class="ai-card-ico"><i class="fa-solid fa-boxes-stacked"></i></div>
+          <h4>Resource Recommender</h4>
+          <p>AI suggests optimal tools and supplies for each active mission based on emergency type and team composition.</p>
+          <div class="ai-result ab" id="res-resource"></div>
+          <button class="launch-btn lb-b" style="font-size:.85rem;padding:9px;" onclick="runAI('resource')"><i class="fa-solid fa-play"></i> Get Recommendations</button>
+        </div>
+        <div class="ai-card">
+          <div class="ai-card-ico"><i class="fa-solid fa-hospital"></i></div>
+          <h4>Hospital Coordinator</h4>
+          <p>Checks nearest hospitals and bed availability, sends automatic pre-alerts to prepare for incoming patients.</p>
+          <div class="ai-result" id="res-hospital"></div>
+          <button class="launch-btn lb-r" style="font-size:.85rem;padding:9px;" onclick="runAI('hospital')"><i class="fa-solid fa-play"></i> Coordinate Hospitals</button>
+        </div>
+      </div>
+      <!-- AI Advisor Chat -->
+      <div class="adv-wrap">
+        <div style="padding:16px 20px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;">
+          <div class="v-ico vi-amber" style="margin:0;width:38px;height:38px;font-size:.9rem;flex-shrink:0;"><i class="fa-solid fa-brain"></i></div>
+          <div>
+            <div style="font-weight:700;color:var(--text);font-size:.88rem;">AI Mission Advisor</div>
+            <div style="font-family:var(--f-mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);">Offline Intelligence — No API Required</div>
+          </div>
+        </div>
+        <div class="adv-body" id="advisorBody"></div>
+        <div class="adv-inp">
+          <input id="advisorInput" type="text" placeholder="Ask for mission strategy, resource allocation, deployment advice..." onkeydown="if(event.key==='Enter')sendAdvisor()"/>
+          <button onclick="sendAdvisor()"><i class="fa-solid fa-paper-plane"></i> Send</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analytics -->
+    <div class="admin-panel" id="panel-analytics">
+      <div class="a-title">Mission Analytics</div>
+      <p class="a-sub">Performance metrics and operational statistics for ITM Rescue Force Bangladesh.</p>
+      <div class="stat-row" style="margin-bottom:24px;">
+        <div class="d-stat ds-r"><div class="d-ico"><i class="fa-solid fa-flag"></i></div><span class="d-num">142</span><span class="d-lbl">Total Missions</span></div>
+        <div class="d-stat ds-g"><div class="d-ico"><i class="fa-solid fa-circle-check"></i></div><span class="d-num">98%</span><span class="d-lbl">Success Rate</span></div>
+        <div class="d-stat ds-a"><div class="d-ico"><i class="fa-solid fa-clock"></i></div><span class="d-num">7.2</span><span class="d-lbl">Avg Response Min</span></div>
+        <div class="d-stat ds-b"><div class="d-ico"><i class="fa-solid fa-people-group"></i></div><span class="d-num">1,247</span><span class="d-lbl">Lives Protected</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+        <div class="v-card">
+          <div class="v-name" style="margin-bottom:14px;font-size:1.1rem;">Mission Type Breakdown</div>
+          <div class="prog-list">
+            <div><div class="prog-hdr"><span>Flood Response</span><span>38%</span></div><div class="prog-track"><div class="prog-fill" style="width:38%;background:var(--sapphire)"></div></div></div>
+            <div><div class="prog-hdr"><span>Fire Rescue</span><span>24%</span></div><div class="prog-track"><div class="prog-fill" style="width:24%;background:var(--red)"></div></div></div>
+            <div><div class="prog-hdr"><span>Road Accident</span><span>21%</span></div><div class="prog-track"><div class="prog-fill" style="width:21%;background:var(--amber)"></div></div></div>
+            <div><div class="prog-hdr"><span>Health Emergency</span><span>17%</span></div><div class="prog-track"><div class="prog-fill" style="width:17%;background:var(--emerald)"></div></div></div>
+          </div>
+        </div>
+        <div class="v-card">
+          <div class="v-name" style="margin-bottom:4px;font-size:1.1rem;">Monthly Mission Count</div>
+          <div class="bar-chart" id="barChart"></div>
+          <div class="bar-lbls"><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div><!-- end admin-layout -->
+</div><!-- end adminContent -->
+
+<script src="rescuegpt-engine.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
